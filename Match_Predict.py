@@ -5,8 +5,9 @@
 '''
 import Formation
 
+
 class Predict(object):
-    #init
+    # init
     def __init__(self,team1, team2, formation1, formation2):  # team1[11], team2[11], formation1, formation
         self.team1 = team1
         self.team2 = team2
@@ -80,7 +81,7 @@ class Predict(object):
 
             result.append(float(upper/below) * p_k_true * p_k_false)
 
-        print result
+        #print result
         # normalization
         count = float(0)
         for r in result:
@@ -91,34 +92,44 @@ class Predict(object):
         return result
 
 
-
-
-
-
-
-
-
 if __name__ == "__main__":
     predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90],
             [4, 4, 2], [4, 5, 1])
     # predict.Binomial_Distribution(0.2, 10)
     predict.Predict()
 
-    predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85],
-                      [4, 5, 1], [4, 5, 1])
+    predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90],
+                      [4, 4, 2], [4, 4, 2])
     predict.Predict()
 
-    predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80],
-                      [4, 5, 1], [4, 5, 1])
-    predict.Predict()
+    predict = Predict([94, 86, 89, 90, 85, 89, 87, 90, 85, 84, 85], [82, 92, 93, 87, 87, 86, 85, 83, 87, 76, 85],
+                      [4, 3, 3], [4, 3, 3])
+    # Real Madrid starting XI: Keylor Navas; Achraf, Varane, Ramos, Marcelo;
+    #  Modrić, Kroos, Isco; Bale,  Benzema, Ronaldo.
+    # Barcelona Starting XI: Ter Stegen; Vidal, Pique, Umtiti, Alba;
+    #  Busquets, Rakitic, Iniesta; Messi, Suarez, Deulofeu.
 
-    predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70],
-                      [4, 5, 1], [4, 5, 1])
     predict.Predict()
+    # predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85],
+    #                   [4, 5, 1], [4, 5, 1])
+    # predict.Predict()
+    #
+    # predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80],
+    #                   [4, 5, 1], [4, 5, 1])
+    # predict.Predict()
+    #
+    # predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70],
+    #                   [4, 5, 1], [4, 5, 1])
+    # predict.Predict()
+    #
+    # predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55],
+    #                   [4, 5, 1], [4, 5, 1])
+    # predict.Predict()
 
-    predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55],
-                      [4, 5, 1], [4, 5, 1])
-    predict.Predict()
+    # predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90],
+    #                   [4, 4, 2], [4, 4, 2])
+    # predict.Predict()
+
     # f = Formation.Formation(1, 5, 4, 1, 5, 4)
     # f.set_player([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90])
     # f.get_Team1()
