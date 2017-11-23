@@ -46,7 +46,7 @@ class Predict(object):
                 else:
                     t1t2even += dbt1[i]*dbt2[j]
 
-        print "t1win", t1win, "t2win", t2win, "t1t2even", t1t2even
+        print "t1win", t1win, "t2win", t2win, "draw", t1t2even
         # expect
         expect1 = float(0)
         for i in range(0, len(dbt1)):
@@ -80,8 +80,7 @@ class Predict(object):
                 below = below * i
 
             result.append(float(upper/below) * p_k_true * p_k_false)
-
-        #print result
+        # print result
         # normalization
         count = float(0)
         for r in result:
@@ -139,68 +138,3 @@ if __name__ == "__main__":
     # f.set_player([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85])
     # f.get_Team1()
     # f.get_Team2()
-
-
-# Input: Data of a given teams team1[11], team2[11], formation for both team formation 1, formation 2.
-# Output: The possibility prediction  of match result.
-'''
-getlocalpossibility(team1[11], team2[11], formation1, formation2)
-Team1fowardNetwork = []
-Team2fowardNetwork = []
-Team1fowardNetwork[0] = 1 # goal
-   keeper
-Team2fowardNetwork[0] = 1 # goal
-   keeper
-for order of team1network
-Team1fowardNetwork[i] = general influence from all the predecessor;
-# this could vary for different position.
-for order of team1network
-Team1fowardNetwork[i] = general influence from all the predecessor;
-# this could vary for different position.
-Team1score = matchroundconstant *
-Team1fowardNetwork[10]
-Team2score = matchroundconstant *
-Team1fowardNetwork[10]
-Team1scoreresult =
-Gaussiandistribution(Team1score)
-Team2scoreresult =
-Gaussiandistribution(Team2score)
-# generate match result possibility
-chart
-by
-crossmatching
-for i in Team1scoreresult:
-    for j In Team2scoreresult: resultchart[i][j] = (
-        Team1scoreresult[i],
-        Team1scoreresult[j])
-    return resultchart
-getlocalpossibility(team1[11], team2
-[11], formatio1, formatio2):
-for formation1, formation2 in different location:
-    possibilityQueue[i] =
-    localpossibility(
-        team1PlayersAtThisLocation,
-        team2PlayersAtThisLocation
-        , location)
-localpossibility(team1players[],
-                 team2players[], location)
-# for dfferent location will
-consider
-different
-player
-status
-team1value = sum
-of
-certain
-player
-status + log(constant * (1 +
-                         player))
-team2value = sum
-of
-certain
-player
-status + log(constant * (1 +
-                         player))
-return team1value / (team1value +
-                     team2value);
-'''
