@@ -56,7 +56,6 @@ class Predict(object):
             expect2 += float(i) * dbt2[i]
 
         print "expect1:", expect1, "expect2:", expect2,
-        return t1win, t2win, t1t2even, expect1, expect2
 
     def Binomial_Distribution(self, p, n):  # Binomial Distribution
         result = []
