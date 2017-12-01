@@ -8,11 +8,12 @@ import Formation
 
 class Predict(object):
     # init
-    def __init__(self,team1, team2, formation1, formation2):  # team1[11], team2[11], formation1, formation
+    def __init__(self,team1, team2, formation1, formation2, home_advantage):  # team1[11], team2[11], formation1, formation
         self.team1 = team1
         self.team2 = team2
         self.formation1 = formation1
         self.formation2 = formation2
+        self.home_advantage = home_advantage
 
     def Predict(self):
         count_total = 0
@@ -30,10 +31,29 @@ class Predict(object):
         f.set_player(self.team1, self.team2)
         r1 = f.get_Team1()
         r2 = f.get_Team2()
+        # add home away advantage
+        if self.home_advantage > 0.2:
+            print "warning high home_advantage"
+        r1 = r1 * (float(1) + self.home_advantage)
+        r2 = r2 * (float(1) - self.home_advantage)
+        #
         dbt1 = self.Binomial_Distribution(r1, team1_rounds)
         dbt2 = self.Binomial_Distribution(r2, team2_rounds)
         # full result
         # TODO print matrix
+        result_matrix = []
+        print "        ",
+        for j in range(0, len(dbt2)):
+            print j, "        ",
+        print "\n",
+        for i in range(0, len(dbt1)):
+            current_row = []
+            result_matrix.append(current_row)
+            print i, " ",
+            for j in range(0, len(dbt2)):
+                current_row.append(dbt1[i]*dbt2[j])
+                print "%.8f" % (dbt1[i]*dbt2[j]),
+            print "\n",
         t1win = float(0)
         t2win = float(0)
         t1t2even = float(0)
@@ -55,7 +75,7 @@ class Predict(object):
         for i in range(0, len(dbt2)):
             expect2 += float(i) * dbt2[i]
 
-        print "expect1:", expect1, "expect2:", expect2,
+        print "expect1:", expect1, "expect2:", expect2
 
     def Binomial_Distribution(self, p, n):  # Binomial Distribution
         result = []
@@ -93,20 +113,26 @@ class Predict(object):
 
 if __name__ == "__main__":
     predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90],
-            [4, 4, 2], [4, 5, 1])
+            [4, 4, 2], [4, 5, 1], 0)
     # predict.Binomial_Distribution(0.2, 10)
     predict.Predict()
 
     predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90],
-                      [4, 4, 2], [4, 4, 2])
+                      [4, 4, 2], [4, 4, 2], 0)
     predict.Predict()
 
     predict = Predict([94, 86, 89, 90, 85, 89, 87, 90, 85, 84, 85], [82, 92, 93, 87, 87, 86, 85, 83, 87, 76, 85],
-                      [4, 3, 3], [4, 3, 3])
+                      [4, 3, 3], [4, 3, 3], 0)
     # Real Madrid starting XI: Keylor Navas; Achraf, Varane, Ramos, Marcelo;
     #  Modrić, Kroos, Isco; Bale,  Benzema, Ronaldo.
     # Barcelona Starting XI: Ter Stegen; Vidal, Pique, Umtiti, Alba;
     #  Busquets, Rakitic, Iniesta; Messi, Suarez, Deulofeu.
+
+    predict.Predict()
+
+    predict = Predict([94, 86, 89, 90, 85, 89, 87, 90, 85, 84, 85], [82, 92, 93, 87, 87, 86, 85, 83, 87, 76, 85],
+                      [4, 3, 3], [4, 3, 3], -0.0473)
+    # same situation if happen at Barcelona home
 
     predict.Predict()
     # predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85],
