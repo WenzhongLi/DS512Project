@@ -10,6 +10,12 @@ import Match_Predict
 data = None
 
 
+@app.route('/', methods=['GET', 'POST'])
+def start():
+    # data =
+    return render_template('index.html')
+
+
 @app.route('/index', methods=['GET', 'POST'])
 def to_index():
     # data =
