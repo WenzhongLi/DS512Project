@@ -7,10 +7,24 @@ from backendserver import app
 from flask import request,render_template,flash,abort,url_for,redirect,session,Flask,g
 import Match_Predict
 
+data = None
+
 
 @app.route('/index', methods=['GET', 'POST'])
 def to_index():
+    # data =
     return render_template('index.html')
+
+
+@app.route('/index', methods=['GET', 'POST'])
+def to_index():
+    # data =
+    return render_template('index.html')
+
+
+@app.route('/MatchPredict', methods=['GET', 'POST'])
+def to_match_predict():
+    return render_template('MatchPredict.html')
 
 
 @app.route('/test', methods=['GET', 'POST'])
