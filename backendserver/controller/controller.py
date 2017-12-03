@@ -16,12 +16,6 @@ def to_index():
     return render_template('index.html')
 
 
-@app.route('/index', methods=['GET', 'POST'])
-def to_index():
-    # data =
-    return render_template('index.html')
-
-
 @app.route('/MatchPredict', methods=['GET', 'POST'])
 def to_match_predict():
     return render_template('MatchPredict.html')
