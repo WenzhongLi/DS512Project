@@ -6,7 +6,7 @@
 from backendserver import app
 from flask import request,render_template,flash,abort,url_for,redirect,session,Flask,g
 import Match_Predict
-
+import find_position
 
 from flask_nav import Nav
 from flask_nav.elements import *
@@ -93,9 +93,19 @@ def to_position_predict():
                   ['Positioning'])
     return render_template('position.html', attributes=attributes)
 
-
 @app.route('/backend/get_position', methods=['GET','POST'])
 def get_position():
     a = request.form.getlist('attributes[]')
-    print a
-    return '0'
+    attributes = []
+    for item in a:
+        print item
+        if item == '':
+            item = 1
+        attributes.append(int(item))
+    print attributes
+    fp = find_position.FindPosition(file='CompleteDataset.csv', attributes=attributes)
+    [best_pos, prob] = fp.predict()
+
+    return best_pos
+
+

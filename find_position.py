@@ -1,22 +1,28 @@
 # coding: utf-8
 import pandas as pd
 import numpy as np
-import seaborn as sns
-sns.set_style("darkgrid")
+# import seaborn as sns
+# sns.set_style("darkgrid")
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import AdaBoostClassifier
+# from sklearn.ensemble import AdaBoostClassifier
 from sklearn.neighbors import KNeighborsClassifier
 
 
-
 class FindPosition(object):
-	def __init__(self, file = 'CompleteDataset.csv', attributes = []):
-		self.df = pd.read_csv(file, dtype=str)
+	def __init__(self, file = 'CompleteDataset.csv', data = None, attributes = []):
+		# import os
+		# print os.getcwd()
+		if type(data) == type(None):
+			print "load data from csv"
+			self.df_raw = pd.read_csv(file, dtype=str)
+		else:
+			self.df_raw = data
+		print self.df_raw
 		self.process_csv()
 		self.define_testcase()
 		self.generate_knn_clf()
 		if attributes == []:
-			print ("Please input player's attributes.")
+			print ("attributes are [].")
 		else:
 			dic = {}
 			for i in range(len(attributes)):
@@ -36,7 +42,7 @@ class FindPosition(object):
 									 'Strength', 'Vision', 'Acceleration', 'Agility',
 									 'Reactions', 'Stamina', 'Balance', 'Ball control', 'Composure', 'Jumping',
 									 'Sprint speed', 'Positioning', 'Preferred Positions']
-		self.df = self.df[columns_needed_rearranged]
+		self.df = self.df_raw[columns_needed_rearranged]
 
 		# We don't want to classify GK because it will be too obvious:
 		self.df['Preferred Positions'] = self.df['Preferred Positions'].str.strip()
@@ -154,9 +160,9 @@ class FindPosition(object):
 		# ST、RW、LW、RM、CM、LM、CAM、CF、CDM、CB、LB、RB、RWB、LWB respectively,
 		# in which W is Wing Forward，ST/CF is Striker/Forward，M id Midfielder，
 		# B is Back，and L/R stands for Left and Right Side
-		print("\nThe best position predicted for this player is:"),
-		print(self.mapping_int_pos[self.clf_knn.predict(self.test_case)[0]])
-		print(self.clf_knn.predict_proba(self.test_case))
+		# print("\nThe best position predicted for this player is:"),
+		# print(self.mapping_int_pos[self.clf_knn.predict(self.test_case)[0]])
+		# print(self.clf_knn.predict_proba(self.test_case))
 		return self.mapping_int_pos[self.clf_knn.predict(self.test_case)[0]], self.clf_knn.predict_proba(self.test_case)
 
 
