@@ -7,6 +7,24 @@ from backendserver import app
 from flask import request,render_template,flash,abort,url_for,redirect,session,Flask,g
 import Match_Predict
 
+
+from flask_nav import Nav
+from flask_nav.elements import *
+
+'''
+nav=Nav()
+nav.register_element('top',Navbar(u'512 PROJECT',
+                                    View(u'GET_PREDICT','get_predict'),
+                                    View(u'GET_POSITION','to_position_predict'),
+                                    #Subgroup(u'项目',
+                                    #         View(u'项目一','about'),
+                                    #         Separator(),
+                                    #         View(u'项目二', 'service'),
+                                    #),
+))
+nav.init_app(app)
+'''
+
 data = None
 
 
@@ -61,3 +79,23 @@ def get_predict():
 
     # "t1win", t1win, "t2win", t2win, "draw", t1t2even
     return result % (r[0], r[1], r[2], r[3], r[4])
+
+
+@app.route('/PositionPredict',methods=['GET','POST'])
+def to_position_predict():
+    attributes = (['Aggression', 'Crossing', 'Curve', 'Dribbling'],
+                  ['Finishing', 'Free_kick_accuracy', 'Heading_accuracy', 'Long_shots'],
+                  ['Penalties', 'Shot_power', 'Volleys', 'Short_passing'],
+                  ['Long_passing', 'Interceptions', 'Marking', 'Sliding_tackle'],
+                  ['Standing_tackle', 'Strength', 'Vision', 'Acceleration'],
+                  ['Agility', 'Reactions', 'Stamina', 'Balance'],
+                  ['Ball_control', 'Composure', 'Jumping', 'Sprint_speed'],
+                  ['Positioning'])
+    return render_template('position.html', attributes=attributes)
+
+
+@app.route('/backend/get_position', methods=['GET','POST'])
+def get_position():
+    a = request.form.getlist('attributes[]')
+    print a
+    return '0'
