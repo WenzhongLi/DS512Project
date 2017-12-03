@@ -17,7 +17,7 @@ class FindPosition(object):
 			self.df_raw = pd.read_csv(file, dtype=str)
 		else:
 			self.df_raw = data
-		print self.df_raw
+		# print self.df_raw
 		self.process_csv()
 		self.define_testcase()
 		self.generate_knn_clf()
