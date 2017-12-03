@@ -606,15 +606,61 @@
                 });
 
 	        	$("#btn_predict").click(function () {
-	        	    var
+	        	    var term1 = [];
+	        	    var term2 = [];
+	        	    var formation1 = [];
+	        	    var formation2 = [];
+	        	    var c1 = [94, 86, 89, 90, 85, 89, 87, 90, 85, 84, 85];
+	        	    var c2 = [82, 92, 93, 87, 87, 86, 85, 83, 87, 76, 85];
+	        	    var c3 = [81, 88, 85, 82, 81, 84, 85, 82, 88, 83, 88];
+	        	    var f1 = [4, 3, 3];
+	        	    var f2 = [4, 5, 1];
+	        	    var f3 = [4, 4, 2];
+	        	    if ($('#team1_name option:selected').index()==0){
+						term1 = c1;
+                    }else if($('#team1_name option:selected').index()==1){
+	        	        term1 = c2;
+                    }else if($('#team1_name option:selected').index()==2){
+                        term1 = c3;
+                    }else{
+                        return;//add new index here
+                    }
+                    if ($('#team2_name option:selected').index()==0){
+						term2 = c1;
+                    }else if($('#team2_name option:selected').index()==1){
+	        	        term2 = c2;
+                    }else if($('#team2_name option:selected').index()==2){
+                        term2 = c3;
+                    }else{
+                        return;//add new index here
+                    }
+                    if ($('#team1_formation option:selected').index()==0){
+						formation1 = f1;
+                    }else if($('#team1_formation option:selected').index()==1){
+						formation1 = f2;
+                    }else if($('#team1_formation option:selected').index()==2){
+						formation1 = f3;
+                    }else{
+                        return;//add new index here
+                    }
+                    if ($('#team2_formation option:selected').index()==0){
+						formation2 = f1;
+                    }else if($('#team2_formation option:selected').index()==1){
+                        formation2 = f2;
+                    }else if($('#team2_formation option:selected').index()==2){
+                        formation2 = f3;
+                    }else{
+                        return;//add new index here
+                    }
+
 	        		$.ajax({
 	        			  type: 'POST',
 	        			  url: '/backend/get_predict',
 	        			  data: {
-                              "term1" : [90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90],
-                              "term2" : [90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90],
-                              "formation1" : [4, 4, 2],
-                              "formation2" : [4, 4, 2]},
+                              "term1" : term1,
+                              "term2" : term2,
+                              "formation1" : formation1,
+                              "formation2" : formation2},
 	        			  success: function (data) {
 	        				  if(data=="SUCC"){
 	        					  //location.reload(true);

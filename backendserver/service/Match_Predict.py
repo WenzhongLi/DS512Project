@@ -76,6 +76,7 @@ class Predict(object):
             expect2 += float(i) * dbt2[i]
 
         print "expect1:", expect1, "expect2:", expect2
+        return t1win, t2win, t1t2even, expect1, expect2
 
     def Binomial_Distribution(self, p, n):  # Binomial Distribution
         result = []
@@ -133,6 +134,15 @@ if __name__ == "__main__":
     predict = Predict([94, 86, 89, 90, 85, 89, 87, 90, 85, 84, 85], [82, 92, 93, 87, 87, 86, 85, 83, 87, 76, 85],
                       [4, 3, 3], [4, 3, 3], -0.0473)
     # same situation if happen at Barcelona home
+
+    predict.Predict()
+
+    predict = Predict([81, 88, 85, 82, 81, 84, 85, 82, 88, 83, 88], [82, 92, 93, 87, 87, 86, 85, 83, 87, 76, 85],
+                      [4, 3, 3], [4, 3, 3], 0.0473)
+    # Atletico de Madrid starting XI: Oblak; Juanfran, Godin, Savic, Filipe Luis;
+    #  Koke, Gabi, Saul; Carrasco, Griezmann, Torres;
+    # Barcelona Starting XI: Ter Stegen; Vidal, Pique, Umtiti, Alba;
+    #  Busquets, Rakitic, Iniesta; Messi, Suarez, Deulofeu.
 
     predict.Predict()
     # predict = Predict([90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90], [85, 85, 85, 85, 85, 85, 85, 85, 85, 85, 85],

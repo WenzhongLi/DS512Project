@@ -5,11 +5,11 @@
 '''
 from backendserver import app
 from flask import request,render_template,flash,abort,url_for,redirect,session,Flask,g
-import Match_Predict
 import find_position
+from backendserver.service import Match_Predict
 
-from flask_nav import Nav
-from flask_nav.elements import *
+# from flask_nav import Nav
+# from flask_nav.elements import *
 
 '''
 nav=Nav()
@@ -52,7 +52,7 @@ def to_test():
 
 @app.route('/backend/get_predict', methods=['POST'])
 def get_predict():
-    a = request.form.get('a', 'a default value')
+    home_away = request.form.get('home_away', 0.0473)
     # term1 = request.form.get('term1', 'term1 default value')
     term1 = request.form.getlist('term1[]')
     term2 = request.form.getlist('term2[]')
@@ -71,10 +71,11 @@ def get_predict():
     f2 = []
     for i in formation2:
         f2.append(int(i))
-    predict = Match_Predict.Predict(t1, t2, f1, f2)
+    predict = Match_Predict.Predict(t1, t2, f1, f2, home_away)
     r = predict.Predict()
 
-    print a, t1, t2, f1, f2
+    print home_away, t1, t2, f1, f2
+    print r
     result = "{\"t1win\" :%s, \"t2win\" :%s,\"draw\" :%s,\"expect1\" :%s,\"expect2\" :%s}"
 
     # "t1win", t1win, "t2win", t2win, "draw", t1t2even
