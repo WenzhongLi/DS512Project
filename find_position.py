@@ -4,21 +4,26 @@ import numpy as np
 import seaborn as sns
 sns.set_style("darkgrid")
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.neural_network import MLPClassifier
-from sklearn.model_selection import GridSearchCV
-# get_ipython().magic('matplotlib inline')
+
 
 
 class FindPosition(object):
-	def __init__(self, file = 'CompleteDataset.csv'):
+	def __init__(self, file = 'CompleteDataset.csv', attributes = []):
 		self.df = pd.read_csv(file, dtype=str)
 		self.process_csv()
-		self.fit_model()
 		self.define_testcase()
 		self.generate_knn_clf()
-		self.console_interaction()
+		if attributes == []:
+			print ("Please input player's attributes.")
+		else:
+			dic = {}
+			for i in range(len(attributes)):
+				dic[self.attributes[i]] = [attributes[i]]
+			self.test_case = pd.DataFrame(data=dic)
+		# self.console_interaction()
+		# self.predict()
 
 	def process_csv(self):
 		# Gather only columns that we need for this analysis purpose:
@@ -63,26 +68,30 @@ class FindPosition(object):
 
 		# self.df_new.iloc[::500, :]
 		self.df_new_normalized_all = self.df_new.copy()
-		self.mapping_pos_int = {'ST': 0, 'RW': 1, 'LW': 2, 'RM': 3, 'CM': 4, 'LM': 5, 'CAM': 6, 'CF': 7,
-								'CDM': 8, 'CB': 9,'LB': 10, 'RB': 11, 'RWB': 12, 'LWB': 13}
-		self.mapping_int_pos = ["ST","RW","LW","RM","CM","LM","CAM","CF","CDM","CB","LB","RB","RWB","LWB"]
+		self.mapping_pos_int = {'CF': 0, 'ST': 1, 'RW': 2, 'LW': 2, 'RM': 3, 'LM': 3, 'CAM': 4, 'CM': 5,
+								'CDM': 6, 'CB': 7,'LB': 8, 'RB': 8, 'RWB': 9, 'LWB': 9}
+		self.mapping_int_pos = ["CF","ST","Wing","SM","CAM","CM","CDM","CB","SB","WB"]
 
 		# mapping positions from string to int
 		self.df_new_normalized_all = self.df_new_normalized_all.replace({'Preferred Positions': self.mapping_pos_int})
 		# self.df_new_normalized_all.iloc[::1000, ]
-	
-	def fit_model(self):
-		# Fit the model:
+
+		# split dataset
 		self.X_train_all, self.X_test_all, self.y_train_all, self.y_test_all = train_test_split(\
-			self.df_new_normalized_all.iloc[:, :-1], self.df_new_normalized_all.iloc[:, -1], test_size=0.05, random_state=0)
+			self.df_new_normalized_all.iloc[:, :-1], self.df_new_normalized_all.iloc[:, -1], test_size=0.1, random_state=0)
 
 	def generate_knn_clf(self):
-		self.clf_knn = KNeighborsClassifier(n_neighbors=150)
+		self.clf_knn = KNeighborsClassifier(n_neighbors=180)
 		self.clf_knn.fit(self.X_train_all, self.y_train_all)
 		print("The classification accuracy is: "),
 		print(self.clf_knn.score(self.X_test_all, self.y_test_all))
 		print("This accuracy is affected by L/R positions, since players "
 			  "in each sides may have similar attributes.")
+
+		# self.clf_knn = AdaBoostClassifier(n_estimators=40)
+		# self.clf_knn.fit(self.X_train_all, self.y_train_all)
+		# print("The classification accuracy is: "),
+		# print(self.clf_knn.score(self.X_test_all, self.y_test_all))
 
 	def show_df(self, df):
 		df.head()
@@ -94,7 +103,7 @@ class FindPosition(object):
 		print('y test shape: {}'.format(self.y_test_all.shape))
 
 	def rearrange_column(self, df):
-		"""rearrrange column so that testing data is listed in the same order with training data"""
+		"""rearrange column so that testing data is listed in the same order with training data"""
 		self.attributes = ['Aggression', 'Crossing', 'Curve', 'Dribbling', 'Finishing',
 									 'Free kick accuracy', 'Heading accuracy', 'Long shots', 'Penalties', 'Shot power',
 									 'Volleys',
@@ -140,6 +149,7 @@ class FindPosition(object):
 			self.test_case = pd.DataFrame(data = dic)
 			# print self.test_case
 
+	def predict(self):
 		# The output of predict_proba is the probability of
 		# ST、RW、LW、RM、CM、LM、CAM、CF、CDM、CB、LB、RB、RWB、LWB respectively,
 		# in which W is Wing Forward，ST/CF is Striker/Forward，M id Midfielder，
@@ -147,6 +157,8 @@ class FindPosition(object):
 		print("\nThe best position predicted for this player is:"),
 		print(self.mapping_int_pos[self.clf_knn.predict(self.test_case)[0]])
 		print(self.clf_knn.predict_proba(self.test_case))
+		return self.mapping_int_pos[self.clf_knn.predict(self.test_case)[0]], self.clf_knn.predict_proba(self.test_case)
 
 
-fp = FindPosition()
+if __name__ == "__main__":
+	fp = FindPosition()
