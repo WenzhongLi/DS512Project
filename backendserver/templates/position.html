@@ -69,20 +69,6 @@
 
 
         <div class="container_1">
-{#            <form role="form" id="Form">#}
-{#                {% for attribute in attributes %}#}
-{#                    <div class="row" >#}
-{#                        {% for item in attribute %}#}
-{#                            <div class="col-xs-2" >#}
-{#                                <label for={{item}}>{{item}}</label>#}
-{#                                <input type="text" class="form-control" id={{item}} placeholder="0">#}
-{##}
-{#                            </div>#}
-{#                        {% endfor %}#}
-{#                    </div>#}
-{#                {% endfor %}#}
-{#            </form>#}
-
             <form>
                 {% for attribute in attributes %}
                     <div class="row" >
@@ -164,18 +150,13 @@
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+
+        <script type="text/javascript" src="http://malsup.github.io/min/jquery.blockUI.min.js"></script>
+
         <script type="text/javascript">
             $(function () {
-    //
-    //	        //1.初始化Table
-    //	        var oTable = new TableInit();
-    //	        oTable.Init();
-                //2.初始化Button的点击事件
                 var oButtonInit = new ButtonInit();
                 oButtonInit.Init();
-    //	        //3.表单初始化
-    //	        var oFormInit = new FormInit();
-    //	        oFormInit.Init();
             });
         </script>
 
@@ -185,59 +166,67 @@
                 var postdata = {};
                 oInit.Init = function () {
                     //初始化页面上面的按钮事件
-                    $("#submit").click(function () {
-                        $.ajax({
-                            type: 'POST',
-                            url: '/backend/get_position',
-                            data: {
-                                "attributes": [
 
-                                    document.getElementById("Aggression").value,
-                                    document.getElementById("Crossing").value,
-                                    document.getElementById("Curve").value,
-                                    document.getElementById("Dribbling").value,
-                                    document.getElementById("Finishing").value,
-                                    document.getElementById("Free_kick_accuracy").value,
-                                    document.getElementById("Heading_accuracy").value,
-                                    document.getElementById("Long_shots").value,
-                                    document.getElementById("Penalties").value,
-                                    document.getElementById("Shot_power").value,
-                                    document.getElementById("Volleys").value,
-                                    document.getElementById("Short_passing").value,
-                                    document.getElementById("Long_passing").value,
-                                    document.getElementById("Interceptions").value,
-                                    document.getElementById("Marking").value,
-                                    document.getElementById("Sliding_tackle").value,
-                                    document.getElementById("Standing_tackle").value,
-                                    document.getElementById("Strength").value,
-                                    document.getElementById("Vision").value,
-                                    document.getElementById("Acceleration").value,
-                                    document.getElementById("Agility").value,
-                                    document.getElementById("Reactions").value,
-                                    document.getElementById("Stamina").value,
-                                    document.getElementById("Balance").value,
-                                    document.getElementById("Ball_control").value,
-                                    document.getElementById("Composure").value,
-                                    document.getElementById("Jumping").value,
-                                    document.getElementById("Sprint_speed").value,
-                                    document.getElementById("Positioning").value
-                                ]
-                            },
-                            success: function (data) {
-                                alert(data)
-                            },
-                            error: function (data) {
-                                alert(data)
-                            },
+                    $(document).ajaxStop($.unblockUI);
 
-                            dataType: "text"
+                    $(document).ready(function() {
+
+                        $("#submit").click(function () {
+
+                            $.blockUI({message: 'we are processing your data...'});
+
+                            $.ajax({
+                                type: 'POST',
+                                url: '/backend/get_position',
+                                data: {
+                                    "attributes": [
+
+                                        document.getElementById("Aggression").value,
+                                        document.getElementById("Crossing").value,
+                                        document.getElementById("Curve").value,
+                                        document.getElementById("Dribbling").value,
+                                        document.getElementById("Finishing").value,
+                                        document.getElementById("Free_kick_accuracy").value,
+                                        document.getElementById("Heading_accuracy").value,
+                                        document.getElementById("Long_shots").value,
+                                        document.getElementById("Penalties").value,
+                                        document.getElementById("Shot_power").value,
+                                        document.getElementById("Volleys").value,
+                                        document.getElementById("Short_passing").value,
+                                        document.getElementById("Long_passing").value,
+                                        document.getElementById("Interceptions").value,
+                                        document.getElementById("Marking").value,
+                                        document.getElementById("Sliding_tackle").value,
+                                        document.getElementById("Standing_tackle").value,
+                                        document.getElementById("Strength").value,
+                                        document.getElementById("Vision").value,
+                                        document.getElementById("Acceleration").value,
+                                        document.getElementById("Agility").value,
+                                        document.getElementById("Reactions").value,
+                                        document.getElementById("Stamina").value,
+                                        document.getElementById("Balance").value,
+                                        document.getElementById("Ball_control").value,
+                                        document.getElementById("Composure").value,
+                                        document.getElementById("Jumping").value,
+                                        document.getElementById("Sprint_speed").value,
+                                        document.getElementById("Positioning").value
+                                    ]
+                                },
+
+                                success: function (data) {
+{#                                    $.unblockUI();#}
+                                    alert("The most possible position for this player is:" + data)
+                                },
+                                error: function (data) {
+                                    alert(data)
+                                },
+                                dataType: "text"
+                            });
                         });
                     });
                 };
                 return oInit
             };
-
-
         </script>
 
     </body>
