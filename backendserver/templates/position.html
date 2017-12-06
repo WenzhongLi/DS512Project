@@ -3,14 +3,13 @@
 {% block content %}
     <html>
     <head>
-        <style type="text/css">
-
-            form{
-                margin-left: 25%;
-                margin-right:15%;
-                width: 70%;
-            }
-        </style>
+{#        <style type="text/css">#}
+{#            .container{#}
+{#                margin-left: 25%;#}
+{#                margin-right:15%;#}
+{#                width:70%;#}
+{#            }#}
+{#        </style>#}
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,8 +31,8 @@
         <!-- Custom styles for this template -->
         <link href="../static/starter-template.css" rel="stylesheet">
 
-
     </head>
+
     <body>
 
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -59,6 +58,9 @@
           </div>
         </nav>
 
+        {% for i in range(3) %}
+            <br>
+        {% endfor %}
 
 
         <!-- what i need -->
@@ -114,6 +116,7 @@
 			    </div>
 			  </div>
         </div>
+
         <br>
 
         <script src="https://code.jquery.com/jquery-1.12.4.min.js">
@@ -161,8 +164,7 @@
 
 
 
-
-        <div class="container_1">
+        <div class="container" align="center">
             <form>
                 {% for attribute in attributes %}
                     <div class="row" >
@@ -174,51 +176,39 @@
                         {% endfor %}
                     </div>
                 {% endfor %}
+
+                <button type="random" class="btn btn-primary" id="random">Random</button>
+                <button type="reset" class="btn btn-primary" id="reset">Reset</button>
+                <button type="submit" class="btn btn-primary" id="submit" data-toggle="modal" data-target="#myModal">Submit</button>
+
             </form>
+
+            
+
         </div>
 
-        <div class="container_2" align="center">
-            <!-- 按钮触发模态框 -->
-            <button type="random" class="btn btn-primary" id="random">Random</button>
-            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
-{#            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="submit">#}
-{#                submit#}
-{#            </button>#}
 
+        <div class="modal fade" id="result_modal" tabindex="-1" role="dialog" aria-labelledby="result_modal_Label">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="result_modal_Label">Predict Result</h4>
+                    </div>
+                <div class="modal-body">
+                    <h3 align="center" id="line1"></h3>
+{#                    <h3 align="center" id="line2"></h3>#}
+{#                    <h3 align="center" id="line3"></h3>#}
+{#                    <h3 align="center" id="line4"></h3>#}
+{#                    <h3 align="center" id="line5"></h3>#}
 
-
-
-
-            <!-- 模态框（Modal） -->
-            <!--
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"
-                                    aria-hidden="true">×
-                            </button>
-                            <h4 class="modal-title" id="myModalLabel">
-                                Position:
-                            </h4>
-                        </div>
-                        <div class="modal-body">
-                            xxxx
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default"
-                                    data-dismiss="modal">close
-                            </button>
-                        </div>
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <!--<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_change_team2">Save changes</button>-->
                     </div>
                 </div>
             </div>
-
-            <script>
-            $(function () { $('#myModal').modal({
-                keyboard: true
-            })});
-            </script>-->
         </div>
 	    <div class="container">
 	      <hr>
@@ -227,6 +217,7 @@
 	        <p>&copy; 2017 CS512</p>
 	      </footer>
 	    </div> <!-- /container -->
+
 
 
         <!-- Bootstrap core JavaScript
@@ -272,21 +263,15 @@
                 var postdata = {};
                 oInit.Init = function () {
                     //初始化页面上面的按钮事件
-
-                    $(document).ajaxStop($.unblockUI);
-
+{#                    $(document).ajaxStop($.unblockUI);#}
                     $(document).ready(function() {
-
                         $("#submit").click(function () {
-
                             $.blockUI({message: 'we are processing your data...'});
-
                             $.ajax({
                                 type: 'POST',
                                 url: '/backend/get_position',
                                 data: {
                                     "attributes": [
-
                                         document.getElementById("Aggression").value,
                                         document.getElementById("Crossing").value,
                                         document.getElementById("Curve").value,
@@ -318,10 +303,12 @@
                                         document.getElementById("Positioning").value
                                     ]
                                 },
-
                                 success: function (data) {
-{#                                    $.unblockUI();#}
-                                    alert("The most possible position for this player is:" + data)
+                                    document.getElementById("line1").innerText = "The most possible position for this player is:\n\n"
+                                        + data ;
+                                    $.unblockUI();
+                                    $("#result_modal").modal("show");
+
                                 },
                                 error: function (data) {
                                     alert(data)
@@ -330,6 +317,9 @@
                             });
                         });
                     });
+{#                    $("#reset").click(function() {#}
+{#                        document.getElementsById("Form").reset();#}
+{#                    });#}
                 };
                 return oInit
             };
