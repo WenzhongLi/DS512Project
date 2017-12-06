@@ -76,7 +76,7 @@ def get_predict():
 
     print home_away, t1, t2, f1, f2
     print r
-    result = "{\"t1win\" :%s, \"t2win\" :%s,\"draw\" :%s,\"expect1\" :%s,\"expect2\" :%s}"
+    result = "{\"t1win\" :%0.4f, \"t2win\" :%0.4f,\"draw\" :%0.4f,\"expect1\" :%0.4f,\"expect2\" :%0.4f}"
 
     # "t1win", t1win, "t2win", t2win, "draw", t1t2even
     return result % (r[0], r[1], r[2], r[3], r[4])
