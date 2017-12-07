@@ -57,20 +57,12 @@
           </div>
         </nav>
 
-        {% for i in range(3) %}
+        {% for i in range(6) %}
             <br>
         {% endfor %}
+
 
         <div class="container">
-             <p>this part....</p>
-        </div>
-
-        {% for i in range(3) %}
-            <br>
-        {% endfor %}
-
-
-        <div class="container" align="center">
             <form>
                 {% for attribute in attributes %}
                     <div class="row" >
@@ -82,7 +74,7 @@
                         {% endfor %}
                     </div>
                 {% endfor %}
-
+                <br>
                 <button type="reset" class="btn btn-primary" id="reset">Reset</button>
 
 
