@@ -9,6 +9,13 @@
                 margin-right:15%;
                 width:90%;
             }
+            #button1{
+                margin-left:25%;
+            }
+            #submit{
+                margin-left:22%;
+                width:20%;
+            }
         </style>
 
         <meta charset="utf-8">
@@ -128,10 +135,10 @@
                     </div>
                 {% endfor %}
                 <br>
-
-                <button type="random" class="btn btn-primary" id="random">Random</button>
-                <button type="reset" class="btn btn-primary" id="reset">Reset</button>
-
+                <div id="button1">
+                    <button type="random" class="btn btn-primary" id="random">Random</button>
+                    <button type="reset" class="btn btn-primary" id="reset">Reset</button>
+                </div>
             </form>
 
             <button type="submit" class="btn btn-primary" id="submit" data-toggle="modal" data-target="#myModal">Submit</button>
