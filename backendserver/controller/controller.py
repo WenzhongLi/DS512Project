@@ -103,7 +103,7 @@ def get_position():
         if item == '':
             item = 1
         attributes.append(int(item))
-    print attributes
+    # print attributes
     fp = find_position.FindPosition(file='CompleteDataset.csv', attributes=attributes)
     [best_pos, prob] = fp.predict()
 
