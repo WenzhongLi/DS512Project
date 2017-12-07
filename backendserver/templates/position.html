@@ -3,13 +3,13 @@
 {% block content %}
     <html>
     <head>
-{#        <style type="text/css">#}
-{#            .container{#}
-{#                margin-left: 25%;#}
-{#                margin-right:15%;#}
-{#                width:70%;#}
-{#            }#}
-{#        </style>#}
+        <style type="text/css">
+            #data{
+                margin-left: 20%;
+                margin-right:15%;
+                width:90%;
+            }
+        </style>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,11 +57,6 @@
             </div><!--/.nav-collapse -->
           </div>
         </nav>
-
-        {% for i in range(6) %}
-            <br>
-        {% endfor %}
-
 
         <!-- what i need -->
         <div class="container">
@@ -117,56 +112,11 @@
 			  </div>
         </div>
 
-        <br>
 
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js">
-        </script>
-        <script>
-            $(document).ready(function(){
-              $("#btn_Messi").click(function(){
-                var messi_attr = [48,85,89,97,95,90,71,88,74,85,85,88,87,22,13,26,28,59,90,92,90,95,73,95,95,96,68,87,93]
-                var i = 0
-                $("input").each(function(){
-                  $(this).val(messi_attr[i])
-                  i = i + 1
-                });
-              });
-              $("#btn_Iniesta").click(function(){
-                var Iniesta_attr = [58,77,80,90,70,70,54,71,71,65,74,92,86,66,57,56,57,58,94,72,79,88,58,84,94,89,52,71,84]
-                var i = 0
-                $("input").each(function(){
-                  $(this).val(Iniesta_attr[i])
-                  i = i + 1
-                });
-              });
-              $("#btn_Ramos").click(function(){
-                var Ramos_attr = [84,66,73,61,60,67,91,55,68,78,66,78,72,88,86,91,89,81,63,75,79,85,84,60,84,80,93,77,52]
-                var i = 0
-                $("input").each(function(){
-                  $(this).val(Ramos_attr[i])
-                  i = i + 1
-                });
-              });
-              $("#random").click(function(){
-                var random_attr = new Array()
-                for (var i=0; i<29; i++){
-                    random_attr[i] = Math.floor((Math.random() * 100) + 1);
-                }
-                var i = 0
-                $("input").each(function(){
-                  $(this).val(random_attr[i])
-                  i = i + 1
-                });
-              });
-        });
-        </script>
+        <div class="container" id="data">
 
-
-
-
-        <div class="container" align="center">
+            <p>(Tips:in these forms, you can only input number between 0-100)</p>
             <form>
-                <p>(Tips:in these forms, you can only input number between 0-100)</p>
                 {% for attribute in attributes %}
                     <div class="row" >
                         {% for item in attribute %}
@@ -219,6 +169,48 @@
 	    </div> <!-- /container -->
 
 
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js">
+        </script>
+
+        <script>
+            $(document).ready(function(){
+              $("#btn_Messi").click(function(){
+                var messi_attr = [48,85,89,97,95,90,71,88,74,85,85,88,87,22,13,26,28,59,90,92,90,95,73,95,95,96,68,87,93]
+                var i = 0
+                $("input").each(function(){
+                  $(this).val(messi_attr[i])
+                  i = i + 1
+                });
+              });
+              $("#btn_Iniesta").click(function(){
+                var Iniesta_attr = [58,77,80,90,70,70,54,71,71,65,74,92,86,66,57,56,57,58,94,72,79,88,58,84,94,89,52,71,84]
+                var i = 0
+                $("input").each(function(){
+                  $(this).val(Iniesta_attr[i])
+                  i = i + 1
+                });
+              });
+              $("#btn_Ramos").click(function(){
+                var Ramos_attr = [84,66,73,61,60,67,91,55,68,78,66,78,72,88,86,91,89,81,63,75,79,85,84,60,84,80,93,77,52]
+                var i = 0
+                $("input").each(function(){
+                  $(this).val(Ramos_attr[i])
+                  i = i + 1
+                });
+              });
+              $("#random").click(function(){
+                var random_attr = new Array()
+                for (var i=0; i<29; i++){
+                    random_attr[i] = Math.floor((Math.random() * 100) + 1);
+                }
+                var i = 0
+                $("input").each(function(){
+                  $(this).val(random_attr[i])
+                  i = i + 1
+                });
+              });
+        });
+        </script>
 
         <!-- Bootstrap core JavaScript
         ================================================== -->
@@ -249,6 +241,8 @@
         <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
 
         <script type="text/javascript" src="http://malsup.github.io/min/jquery.blockUI.min.js"></script>
+
+
 
         <script type="text/javascript">
             $(function () {
@@ -324,6 +318,8 @@
                 return oInit
             };
         </script>
+
+
 
     </body>
     </html>
