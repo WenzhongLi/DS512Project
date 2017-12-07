@@ -22,6 +22,7 @@
         <title>CS512 Project</title>
 
         <!-- Bootstrap core CSS -->
+        <link href="../static/fp_theme.css" rel="stylesheet" type="text/css" media="all" />
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -62,8 +63,108 @@
         {% endfor %}
 
 
-
+        <!-- what i need -->
         <div class="container">
+             <div class="container-overflow-wrap">
+			    <div class="container">
+			      <!-- What I really need -->
+			      <div class="row row-padded row-bordered row-centered">
+			        <div class="col-sm-12">
+			          <div class="row m-b-lg">
+			            <div class="col-sm-8 col-sm-offset-2 text-center">
+			              <h3><strong>Player Position Prediction</strong></h3>
+			              <h4 class="m-b-lg">This is a demo of our play position prediction. Add something more if necessary.</h4>
+			            </div>
+			          </div>
+			          <div class="row">
+			            <div class="col-md-4 m-b-lg">
+			              <div class="panel panel-default panel-profile m-b-0">
+			                <div class="panel-heading" style="background-image: url(../static/barcelona2.jpg);"></div>
+			                <div class="panel-body text-center">
+			                  <img class="panel-profile-img" src="http://img3.yxlady.com/yl/UploadFiles_5361/20151124/20151124124508431.jpg">
+			                  <h5 class="panel-title">Lionel Messi</h5>
+			                  <p class="m-b">Vice Captain of FC Barcelona</p>
+                              <button id="btn_Messi" type="button" class="btn btn-primary-outline btn-sm m-b">Load Messi's Attribute</button>
+			                </div>
+			              </div>
+			            </div>
+			            <div class="col-md-4 m-b-lg">
+			              <div class="panel panel-default panel-profile m-b-0">
+			                <div class="panel-heading" style="background-image: url(../static/barcelona2.jpg);"></div>
+			                <div class="panel-body text-center">
+			                  <img class="panel-profile-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5ppEUiW1fhaJI7_1IRHGSt_XPgyLXC-dn2NzX-55AINlfAd8Sog">
+			                  <h5 class="panel-title">Andrés Iniesta</h5>
+			                  <p class="m-b">Captain of FC Barcelona</p>
+			                  <button id="btn_Iniesta" type="button" class="btn btn-primary-outline btn-sm m-b">Load Iniesta's Attribute</button>
+			                </div>
+			              </div>
+			            </div>
+			            <div class="col-md-4 m-b-lg">
+			              <div class="panel panel-default panel-profile m-b-0">
+			                <div class="panel-heading" style="background-image: url(../static/madrid2.jpg);"></div>
+			                <div class="panel-body text-center">
+			                  <img class="panel-profile-img" src="../static/ramos.jpg">
+			                  <h5 class="panel-title">Sergio Ramos</h5>
+			                  <p class="m-b">Captain of Real Madrid C.F.</p>
+			                  <button id="btn_Ramos" type="button" class="btn btn-primary-outline btn-sm m-b">Load Ramos's Attribute</button>
+			                </div>
+			              </div>
+			            </div>
+			          </div>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+        </div>
+
+        <br>
+
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js">
+        </script>
+        <script>
+            $(document).ready(function(){
+              $("#btn_Messi").click(function(){
+                var messi_attr = [48,85,89,97,95,90,71,88,74,85,85,88,87,22,13,26,28,59,90,92,90,95,73,95,95,96,68,87,93]
+                var i = 0
+                $("input").each(function(){
+                  $(this).val(messi_attr[i])
+                  i = i + 1
+                });
+              });
+              $("#btn_Iniesta").click(function(){
+                var Iniesta_attr = [58,77,80,90,70,70,54,71,71,65,74,92,86,66,57,56,57,58,94,72,79,88,58,84,94,89,52,71,84]
+                var i = 0
+                $("input").each(function(){
+                  $(this).val(Iniesta_attr[i])
+                  i = i + 1
+                });
+              });
+              $("#btn_Ramos").click(function(){
+                var Ramos_attr = [84,66,73,61,60,67,91,55,68,78,66,78,72,88,86,91,89,81,63,75,79,85,84,60,84,80,93,77,52]
+                var i = 0
+                $("input").each(function(){
+                  $(this).val(Ramos_attr[i])
+                  i = i + 1
+                });
+              });
+              $("#random").click(function(){
+                var random_attr = new Array()
+                for (var i=0; i<29; i++){
+                    random_attr[i] = Math.floor((Math.random() * 100) + 1);
+                }
+                var i = 0
+                $("input").each(function(){
+                  $(this).val(random_attr[i])
+                  i = i + 1
+                });
+              });
+        });
+        </script>
+
+
+
+
+        <div class="container" align="center">
             <form>
                 <p>(Tips:in these forms, you can only input number between 0-100)</p>
                 {% for attribute in attributes %}
@@ -77,8 +178,9 @@
                     </div>
                 {% endfor %}
                 <br>
-                <button type="reset" class="btn btn-primary" id="reset">Reset</button>
 
+                <button type="random" class="btn btn-primary" id="random">Random</button>
+                <button type="reset" class="btn btn-primary" id="reset">Reset</button>
 
             </form>
 
@@ -108,6 +210,13 @@
                 </div>
             </div>
         </div>
+	    <div class="container">
+	      <hr>
+
+	      <footer>
+	        <p>&copy; 2017 CS512</p>
+	      </footer>
+	    </div> <!-- /container -->
 
 
 
