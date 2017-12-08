@@ -35,4 +35,22 @@ In command line:
 
 ### Part 3: Predict Match Result
 
-xxx.py
+flask_starter.py: The flask starter for our webpage
+
+Formation.py: 
+
+Match_Predict.py:
+
+#### Example Use Case 1 (Recommended)
+
+In command line:
+> python flask_starter.py
+
+In web browser:
+> 127.0.0.1:5000
+
+#### Example Use Case 2
+
+In command line:
+
+> Python Match_Predict.py
