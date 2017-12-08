@@ -168,6 +168,25 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="error_modal" tabindex="-1" role="dialog" aria-labelledby="result_modal_Label">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="result_modal_Label">Error!</h4>
+                    </div>
+                <div class="modal-body">
+                    <h3 align="center" id="line2"></h3>
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <!--<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_change_team2">Save changes</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 	    <div class="container">
 	      <hr>
 
@@ -324,7 +343,9 @@
 
                                 },
                                 error: function (data) {
-                                    alert(data)
+                                    document.getElementById("line2").innerText = "Something wrong with your data! Please pay attention to the tip!";
+                                    $.unblockUI();
+                                    $("#error_modal").modal("show");
                                 },
                                 dataType: "text"
                             });
