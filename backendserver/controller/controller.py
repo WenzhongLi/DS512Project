@@ -103,7 +103,7 @@ def get_position():
             int(i)
         except:
             return
-        if int(i) > 100:
+        if int(i) > 100 or int(i) < 0:
             return
 
     attributes = []
