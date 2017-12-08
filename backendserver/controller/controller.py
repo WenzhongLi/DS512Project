@@ -97,6 +97,15 @@ def to_position_predict():
 @app.route('/backend/get_position', methods=['GET','POST'])
 def get_position():
     a = request.form.getlist('attributes[]')
+
+    for i in a:
+        try:
+            int(i)
+        except:
+            return
+        if int(i) > 100:
+            return
+
     attributes = []
     for item in a:
         print item
