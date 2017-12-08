@@ -1,15 +1,9 @@
 # DS512Project
 Course 512 Projects
 
-This is for group: 
+This is for group: Wenzhong Li, Zhaolei Wang, and Chengtian Liu
 
-Wenzhong Li
-
-Zhaolei Wang
-
-Chengtian Liu
-
-### Part 1: Installation
+### Part 1: Install Dependencies
 
 > pip install pandas
 
@@ -19,7 +13,7 @@ Chengtian Liu
 
 > pip install flask
 
-### Part 2: Predict position
+### Part 2: Predict Player Position
 
 flask_starter.py: The flask starter for our webpage
 
@@ -39,6 +33,6 @@ In command line:
 
 > Python find_position.py
 
-### Part 3: Match position
+### Part 3: Predict Match Result
 
 xxx.py
