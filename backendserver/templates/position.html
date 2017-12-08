@@ -9,13 +9,13 @@
                 margin-right:15%;
                 width:90%;
             }
-            #reset{
+/*            #reset{
                 margin-left:23%;
                 width:20%;
-            }
-            #submit{
+            }*/
+/*            #submit{
                 margin-left:23%;
-            }
+            }*/
             #random{
             }
         </style>
@@ -137,13 +137,12 @@
                     </div>
                 {% endfor %}
                 <br>
-
-
-                <button type="reset" class="btn btn-primary" id="reset">Reset</button>
-
+            <div class="panel-body text-center">
+            <button type="random" class="btn btn-primary-outline btn-sm m-b" id="random">Random</button>
+            <button type="reset" class="btn btn-primary-outline btn-sm m-b" id="reset">Reset</button>
+            <button type="submit" class="btn btn-primary-outline btn-sm m-b" id="submit" data-toggle="modal" data-target="#myModal">Submit</button>
+            </div>
             </form>
-            <button type="random" class="btn btn-primary" id="random">Random</button>
-            <button type="submit" class="btn btn-primary" id="submit" data-toggle="modal" data-target="#myModal">Submit</button>
 
         </div>
 
@@ -215,6 +214,17 @@
                 var i = 0
                 $("input").each(function(){
                   $(this).val(random_attr[i])
+                  i = i + 1
+                });
+              });
+              $("#reset").click(function(){
+                var reset_attr = new Array()
+                for (var i=0; i<29; i++){
+                    reset_attr[i] = "";
+                }
+                var i = 0
+                $("input").each(function(){
+                  $(this).val(reset_attr[i])
                   i = i + 1
                 });
               });
