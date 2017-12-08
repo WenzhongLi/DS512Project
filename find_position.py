@@ -233,5 +233,6 @@ class FindPosition(object):
 
 
 if __name__ == "__main__":
-	fp = FindPosition(attributes=[84,66,73,61,60,67,91,55,68,78,66,78,72,88,86,91,89,81,63,75,79,85,84,60,84,80,93,77,52])
+	fp = FindPosition()
+	fp.console_interaction()
 	fp.predict()
