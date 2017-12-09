@@ -1,4 +1,4 @@
-# DS512Project
+# DS & ALG INTRO 01 CS512 Project
 Course 512 Projects
 
 This is for group: Wenzhong Li, Zhaolei Wang, and Chengtian Liu
